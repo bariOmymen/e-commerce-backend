@@ -37,6 +37,7 @@ userRouter.post('/singin', expressAsyncHandler(async (req,res) => {
 const user = await User.findOne({email : req.body.email});
 if(user){
    if(bcrypt.compareSync(req.body.password,user.password)){
+      console.log('user hhhhhhhhhhhhh');
       res.send({
          name: user.name,
          email: user.email,
@@ -44,10 +45,11 @@ if(user){
          isAdmin: user.isAdmin,
          token: generateToken(user)
       });
-
-      return;
+   
+     return;
    }
 }
+return res.status(401).send({message : 'Email and/or Password are invalid'});
 
 }))
 

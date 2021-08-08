@@ -52,11 +52,26 @@ header .container {
 .dropdown {
 display: inline-block;
 position: relative;
-padding: 2rem 3rem;
-width: 5rem;
-color: white;
 
+color: white;
 }
+.dropdown-content{
+  position: absolute;
+  top:1.2rem;
+  right: 5px;
+  align-self: center;
+  background-color: rgb(3, 3, 14);
+  padding: .5rem 3rem;
+  border-radius: 5px;
+  display: none;
+ 
+}
+
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+
+
 
 /* rating */
 .rating{
@@ -68,21 +83,7 @@ color: white;
 
 /*/////////////////*/
 
-.dropdown-content{
-  position: absolute;
-  top:5rem;
-  right: 5px;
-  align-self: center;
-  background-color: rgb(3, 3, 14);
-  padding: .5rem 3rem;
-  border-radius: 5px;
-  display: none;
- 
-}
 
-.dropdown :hover .dropdown-content{
-  display: block;
-}
 
 
 
@@ -282,7 +283,11 @@ background-color: rgba(241, 235, 235, 0.945);
   margin-top: 3rem;
   text-decoration: none;
 }
-
+/* cartitems */
+.cart{
+  padding: 20px;
+  
+}
 
 
 
@@ -436,6 +441,7 @@ margin: auto;
   width: 95%;
   margin: 3px auto;
   border-radius:4px ;
+
 }
 
 .paid{

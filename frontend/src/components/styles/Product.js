@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+text-decoration: none;
+`;
 export const Container = styled.div``;
 export const Card = styled.div`
 border:.1rem #c0c0c0 solid;
@@ -16,5 +18,8 @@ export const Image = styled.img`
 
 
 `;
-export const Price = styled.p``;
+export const Price = styled.p`
+font-weight:bold;
+font-size: 25px;
+`;
 //export const Title = styled.h1``;

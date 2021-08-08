@@ -74,7 +74,7 @@ const ProductScreen = ({product,getProduct, addToCart, ...props}) => {
                     }}>
 
                         {
-                            [...Array(product.countInStock).keys()].map(x => <option value={x + 1} >{x + 1}</option>)
+                            [...Array(product.countInStock).keys()].map((x, key) => <option key={key} value={x + 1} >{x + 1}</option>)
                         }
                     </select>
                 </div>

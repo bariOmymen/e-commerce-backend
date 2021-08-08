@@ -3,15 +3,17 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signIn } from '../actions/userActions';
 import { useAuth } from '../router-helper';
-const SinginScreen = ({userInfo, error, signIn, location,history, state}) => {
+import  ErrorBox  from '../components/ErrorBox';
+const SinginScreen = ({user,location,history, state}) => {
 const auth = useAuth();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const redirect = location.search ? location.search.split('=')[1] : '/';
-    
+    const {userInfo, error} = user;
+    console.log(error?.message);
 
     useEffect(() => {
-            if(userInfo){
+            if( userInfo && !userInfo?.message){
                 history.push(redirect);
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
             }
@@ -30,6 +32,15 @@ const auth = useAuth();
     return (
         <div className='signin'>
             <div className='container'>
+                <h1>signIn</h1>
+                 {error?.message &&
+                  <ErrorBox className='error'>
+                     
+                     <ErrorBox.Text>{error?.message}</ErrorBox.Text>
+                     
+                     </ErrorBox>}
+
+              
             <form className='signin-form form' onSubmit={submitHandler}>
             <div>
                 <label htmlFor="email">Email</label>
@@ -41,11 +52,11 @@ const auth = useAuth();
                 </input>
                 </div>
 <div>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Password</label>
                 <input value={password} 
-                 type="text"
+                 type="password"
                 onChange={(e) => setPassword(e.target.value)} 
-                placeholder="Name">
+                placeholder="Password">
 
                 </input>
                 </div>
@@ -62,6 +73,6 @@ const auth = useAuth();
     )
 }
 
-export default connect((state) => ({userInfo : state.user.userInfo,
+export default connect((state) => ({user : state.user,
 state : state
 }), {signIn})(SinginScreen);

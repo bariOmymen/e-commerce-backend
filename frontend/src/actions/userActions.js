@@ -4,26 +4,35 @@ export const signIn = (email, password) => async (dispatch) => {
     
 dispatch({type : SIGN_IN_USER_REQUEST, payLoad: {email, password}})
 try{
+    console.log('erroro but not');
     await fetch('http://localhost:5000/api/users/singin',{
         method : 'POST',
         headers : {"content-Type" : "application/json" },
         body : JSON.stringify({email,password})
     }).then(res => res.json()).then(data => {
-    
+       if(data?.message){
         dispatch({
+            type: SIGN_IN_USER_FAIL,
+            error : data
+        })
+       }else{dispatch({
         type : SIGN_IN_USER_SUCCESS,
         payLoad : data
     })
-    localStorage.setItem('userInfo', JSON.stringify(data))
+ localStorage.setItem('userInfo', JSON.stringify(data))
+}
+        
+   
 })
 
 }
-catch(e){
+catch(error){
+    console.log(error);
     dispatch({
         type: SIGN_IN_USER_FAIL,
-        payLoad :  e.response && e.response.data.message ? e.response.data.message : e.message
+        error : error.message
     })
-   
+  // e.response && e.response.data.message ? e.response.data.message : e.message
 }
 } 
 export const signOut = () => (dispatch) => {

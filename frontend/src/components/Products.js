@@ -19,9 +19,9 @@ const Products = ({product},props) => {
      <Product.Title> {product.name} </Product.Title>
      </Link>
      <div className="price">
-       <h3>
-         {product.price}
-       </h3>
+       <Product.Price>
+         {product.price} $
+       </Product.Price>
      </div>
      <div>
      <Rating key={product._id} rating={product.rating} numReviews={product.numReviews} />

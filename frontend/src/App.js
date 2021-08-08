@@ -20,6 +20,7 @@ import OrderHistory from './screens/OrderHistory';
 import UserProfileScreen from './screens/UserProfileScreen';
 import { useAuth } from './router-helper';
 import ProtectedRoute from './ProtectedRoute';
+import CartBadge from './components/CartBadge';
 
 
 
@@ -42,10 +43,39 @@ function App() {
 <div className="container">
 <Link to="/signin"> AMAZONIA</Link>
 <div className='right-side'>
-<Link className='cart' to="/cart"> Cart {cartItems ? <span>
+<Link className='cart' to="/cart"> Cart {cartItems.length > 0 ? <CartBadge show classes='cart-badge'>
   {cartItems.length}
-</span> : {}}</Link>
+</CartBadge> : null}</Link>
 
+{userInfo ? (
+              <div className="dropdown">
+                <Link to="#">
+                  {userInfo.name} <FontAwesomeIcon icon={faCaretDown}></FontAwesomeIcon>{' '}
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/userprofile">User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={() => {auth.signout()}}>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/signin">Sign In</Link>
+            )}
+
+
+
+
+
+
+{/*
 {userInfo? (
 
 <div className="dropdown">
@@ -72,6 +102,7 @@ function App() {
   
 
 }
+*/}
 
 
 

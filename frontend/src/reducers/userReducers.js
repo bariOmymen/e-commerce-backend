@@ -10,7 +10,7 @@ switch(action.type){
     })
     case SIGN_IN_USER_FAIL:
         return({
-            loading : false, message : action.data
+            loading : false, error : action.error
         })
         case SIGNOUT_USER:
             return({
