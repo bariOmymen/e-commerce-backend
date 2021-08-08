@@ -32,7 +32,7 @@ catch(error){
         type: SIGN_IN_USER_FAIL,
         error : error.message
     })
-  // e.response && e.response.data.message ? e.response.data.message : e.message
+  
 }
 } 
 export const signOut = () => (dispatch) => {
