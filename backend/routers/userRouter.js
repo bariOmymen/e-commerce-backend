@@ -45,7 +45,7 @@ userRouter.get(
 
 userRouter.post(
   "/singin",
-  expressAsyncHandler(async (req, res) => {
+  expressAsyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -60,9 +60,15 @@ userRouter.post(
         return;
       }
     }
-    return res
-      .status(402)
-      .send({ message: "Email and/or Password are invalid" });
+    // return res.status(402).send({
+    //   name: "Log in Failed",
+    //   message: "Email and/or Password are invalid",
+    // });
+
+    res.status(404).send({
+      name: "Somthing is worng",
+      message: "Email and/or Password are invalid",
+    });
   })
 );
 
